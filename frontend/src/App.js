@@ -11,6 +11,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/Signup" element={<Signup />} />
+          
         </Routes>
       </BrowserRouter>
 
