@@ -6,6 +6,7 @@ const userSchema=new mongoose.Schema({
     lyrics:String,
     image:String,
     file:String,
+    cover:String,
 });
 
 module.exports = mongoose.model("music",userSchema)

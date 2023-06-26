@@ -5,6 +5,47 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 const Addmusic = () => {
+  const url = 'http://localhost:5000';
+  const navigate = useNavigate();
+
+  const musicform = useFormik({
+    initialValues: {
+      title: '',
+      singer: '',
+      lyrics: '',
+      uploadfile: '',
+      cover : '',
+    },
+    onSubmit: async(values) => {
+      console.log(values);
+      const res = await fetch(`${url}/music/add`, {
+        method: "POST",
+        body : JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.status);
+
+      if(res.status === 200){
+        Swal.fire({
+          icon: 'success',
+          title : 'Success',
+          text: 'User Registered Successfully!!',
+        });
+        
+        const data = (await res.json()).result;
+        navigate('');
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title : 'Error',
+          text: 'Some Error Occured!!',
+        })
+      }
+
+    }
+  })
   return (
     <div>
       <section className="" style={{ backgroundColor: "#eee" }}>
@@ -16,21 +57,38 @@ const Addmusic = () => {
                   <div className="row justify-content-center flex-row-reverse">
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                        Sign up
+                        Add Your Music
                       </p>
-                      <form className="mx-1 mx-md-4" onSubmit={signupform.handleSubmit}>
+                      <form className="mx-1 mx-md-4" onSubmit={musicform.handleSubmit}>
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-user fa-lg me-3 fa-fw" />
                           <div className="flex-fill mb-0">
                             <label className="form-label" htmlFor="form3Example1c">
-                              Your Name
+                              Title
                             </label>
                             <input
 
                               type="text"
-                              id="name"
-                              onChange={signupform.handleChange}
-                              value={signupform.values.name}
+                              id="title"
+                              onChange={musicform.handleChange}
+                              value={musicform.values.title}
+                              className="form-control"
+                            />
+
+                          </div>
+                        </div>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-user fa-lg me-3 fa-fw" />
+                          <div className="flex-fill mb-0">
+                            <label className="form-label" htmlFor="form3Example1c">
+                              Singer
+                            </label>
+                            <input
+
+                              type="text"
+                              id="singer"
+                              onChange={musicform.handleChange}
+                              value={musicform.values.singer}
                               className="form-control"
                             />
 
@@ -40,29 +98,43 @@ const Addmusic = () => {
                           <i className="fas fa-envelope fa-lg me-3 fa-fw" />
                           <div className=" flex-fill mb-0">
                             <label className="form-label" htmlFor="form3Example3c">
-                              Your Email
+                              Lyrics
                             </label>
                             <input
-                              type="email"
-                              id="email"
-                              onChange={signupform.handleChange}
-                              value={signupform.values.email}
+                              type="text"
+                              id="lyrics"
+                              onChange={musicform.handleChange}
+                              value={musicform.values.email}
                               className="form-control"
                             />
 
                           </div>
                         </div>
-                        <div className="d-flex flex-row align-items-center mb-4">
+                        {/* <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-lock fa-lg me-3 fa-fw" />
                           <div className=" flex-fill mb-0">
                             <label className="form-label" htmlFor="form3Example4c">
-                              Password
+                              Image
                             </label>
                             <input
-                              type="password"
+                              type="file"
                               id="password"
-                              onChange={signupform.handleChange}
-                              value={signupform.values.password}
+                              onChange={musicform.handleChange}
+                              value={musicform.values.password}
+                              className="form-control"
+                            />
+
+                          </div>
+                        </div> */}
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw" />
+                          <div className=" flex-fill mb-0">
+                            <label className="form-label" htmlFor="form3Example4cd">
+                              Upload File
+                            </label>
+                            <input
+                              type="file"
+                              id="form3Example4cd"
                               className="form-control"
                             />
 
@@ -72,10 +144,10 @@ const Addmusic = () => {
                           <i className="fas fa-key fa-lg me-3 fa-fw" />
                           <div className=" flex-fill mb-0">
                             <label className="form-label" htmlFor="form3Example4cd">
-                              Repeat your password
+                              Cover
                             </label>
                             <input
-                              type="password"
+                              type="file"
                               id="form3Example4cd"
                               className="form-control"
                             />
@@ -96,13 +168,13 @@ const Addmusic = () => {
                         </div>
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button type="submit" className="btn btn-primary btn-lg">
-                            Register
+                            Successfully Added
                           </button>
                         </div>
                       </form>
                       <p className="text-center text-muted mt-5 mb-0">
                         Have already an account?{" "}
-                        <Link to="/main/login" className="fw-bold text-body">
+                        <Link to="/login" className="fw-bold text-body">
                           <u>Login here</u>
                         </Link>
                       </p>

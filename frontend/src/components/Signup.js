@@ -33,7 +33,7 @@ const Signup = () => {
         });
         
         const data = (await res.json()).result;
-        navigate('/main/login');
+        navigate('/login');
       }else{
         Swal.fire({
           icon: 'error',
