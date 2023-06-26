@@ -1,12 +1,14 @@
 import { useFormik } from "formik";
 import React from "react";
-
+import app_config from "../config";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   
   const navigate = useNavigate();
+
+  const url = app_config.apiUrl
 
   const loginform = useFormik({
     initialValues: {
@@ -15,7 +17,7 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       console.log(values);
-      const res = await fetch(`${''}/user/auth`, {
+      const res = await fetch(`${url}/user/auth`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
