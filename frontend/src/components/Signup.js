@@ -30,7 +30,8 @@ const Signup = () => {
           icon: 'success',
           title : 'Success',
           text: 'User Registered Successfully!!',
-        })
+        });
+        
         const data = (await res.json()).result;
         navigate('/main/login');
       }else{

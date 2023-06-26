@@ -1,44 +1,4 @@
-.App {
-  padding: 10px;
-}  
 
-.abd li{
-  display: inline-block;
-  padding: 10px;
-}
-ul li a{
-  text-decoration: none;
-}
- ul{
-  margin: 0;
-  background-color: skyblue;
-}
-.footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: skyblue;
-  text-align: center;
-}
-.box{
-  margin-left: 30%;
-  
-}
-.ab{
-  display: block;
-  margin: 25px;
-  border: 1px solid skyblue;
-  border-radius: 15px;
-  width: 300px;
-}
-.but{
-  margin: 25px;
-  padding: 10px;
-  width: 150px;
-  background-color: skyblue;
-  border: 1px solid black;
-  cursor: pointer;
-}
 
 
 
