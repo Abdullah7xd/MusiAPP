@@ -6,12 +6,12 @@ import { BiSkipNext, BiSkipPrevious } from "react-icons/bi"; // icons for next a
 import { IconContext } from "react-icons"; // for customazing the icons
 
 import './musicPlayer.css'
-import kyaMujhePyarHai from "../assets/kyaMujhePyarHai.mp3"; // importing the music
+import KyaMujhePyarHai from "../assets/KyaMujhePyarHai.mp3"; // importing the music
 
 const MusicPlayer = () => {
 
     const [isPlaying, setIsPlaying] = useState(false)
-    const [play, { pause, duration, sound }] = useSound(kyaMujhePyarHai);
+    const [play, { pause, duration, sound }] = useSound(KyaMujhePyarHai);
     const [time, setTime] = useState({
         min: "",
         sec: ""

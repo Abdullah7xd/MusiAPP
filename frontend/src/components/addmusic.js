@@ -141,7 +141,7 @@ const Addmusic = () => {
                             <label className="form-label" htmlFor="form3Example3c">
                               Lyrics
                             </label>
-                            <input
+                            <textarea
                               type="text"
                               id="lyrics"
                               onChange={musicform.handleChange}

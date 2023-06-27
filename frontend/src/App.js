@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Addmusic from './components/Addmusic';
 import Musiclisting from './components/Musiclisting';
+import MusicPlayer from './components/MusicPlayer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/addmusic" element={<Addmusic />} />
           <Route path="/login" element={<Login />} />
           <Route path="/musiclisting" element={<Musiclisting />} />
+          <Route path="/musicplayer" element={<MusicPlayer />} />
         </Routes>
       </BrowserRouter>
 
