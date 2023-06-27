@@ -2,6 +2,7 @@ const express = require('express');
 
 const userRouter = require('./routers/userRouter')
 const musicRouter = require('./routers/musicRouter')
+const utilRouter = require('./routers/util')
 
 
 const cors = require('cors')
@@ -16,6 +17,7 @@ app.use(cors({
 app.use(express.json());                 
 app.use('/user', userRouter);
 app.use('/music', musicRouter);
+app.use('/util', utilRouter);
 
 
 

@@ -1,12 +1,51 @@
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 const Addmusic = () => {
+
   const url = 'http://localhost:5000';
   const navigate = useNavigate();
+
+  const [selFile, setSelFile] = useState('');
+  const [selCover, setSelCover] = useState('');
+
+  const uploadFile = (e) => {
+    const file = e.target.files[0];
+    const fd = new FormData();
+    fd.append("myfile", file);
+
+    setSelFile(file.name);
+
+    fetch(url + "/util/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then((res) => {
+      if (res.status === 200) {
+        console.log("file uploaded");
+      }
+    });
+  };
+
+  const uploadCover = (e) => {
+    const file = e.target.files[0];
+    const fd = new FormData();
+    fd.append("myfile", file);
+
+    setSelCover(file.name);
+
+    fetch(url + "/util/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then((res) => {
+      if (res.status === 200) {
+        console.log("file uploaded");
+      }
+    });
+  };
+  
 
   const musicform = useFormik({
     initialValues: {
@@ -17,6 +56,8 @@ const Addmusic = () => {
       cover : '',
     },
     onSubmit: async(values) => {
+      values.uploadfile = selFile;
+      values.cover = selCover;
       console.log(values);
       const res = await fetch(`${url}/music/add`, {
         method: "POST",
@@ -31,7 +72,7 @@ const Addmusic = () => {
         Swal.fire({
           icon: 'success',
           title : 'Success',
-          text: 'User Registered Successfully!!',
+          text: 'Music Added Successfully!!',
         });
         
         const data = (await res.json()).result;
@@ -134,7 +175,7 @@ const Addmusic = () => {
                             </label>
                             <input
                               type="file"
-                              id="form3Example4cd"
+                              onChange={uploadFile}
                               className="form-control"
                             />
 
@@ -148,7 +189,7 @@ const Addmusic = () => {
                             </label>
                             <input
                               type="file"
-                              id="form3Example4cd"
+                              onChange={uploadCover}
                               className="form-control"
                             />
 
@@ -168,7 +209,7 @@ const Addmusic = () => {
                         </div>
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button type="submit" className="btn btn-primary btn-lg">
-                            Successfully Added
+                            Add Music
                           </button>
                         </div>
                       </form>
